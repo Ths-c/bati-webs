@@ -5,6 +5,7 @@ import logo from '../../../assets/logo/download.jpg';
 import AnimatedList from '../../effect/AnimatedList'
 import CardNav from '../nav/CardNav'
 import { m } from 'motion/react';
+import { title } from 'motion/react-client';
 
 
 const duration = 1.25;
@@ -68,7 +69,7 @@ const App = () => {
   );
 };
 
-export default function MainHero() {
+export default function MainHero({ title, highlightedWord, buttonText, buttonLink }) {
 
   const [isMobile, setIsMobile] = React.useState(false);
 
@@ -101,7 +102,7 @@ export default function MainHero() {
         </nav>
         <div className="text-center mt-15">
           <SplitText
-            text="Transforma tus ideas en "
+            text={title}
             className="text-3xl inline-block font-semibold  w-90"
             delay={50}
             duration={1.25}
@@ -115,7 +116,7 @@ export default function MainHero() {
             showCallback
           />
           <SplitText
-            text="realidad"
+            text={highlightedWord}
             className="text-3xl inline-block font-semibold w-90 text-[#ffa31a]"
             delay={50}
             duration={1.25}
@@ -131,10 +132,10 @@ export default function MainHero() {
 
           <div className="ml-10 mt-5 flex items-center gap-x-6">
             <a
-              href="#"
+              href={buttonLink}
               className="rounded-md px-3.5 py-2.5 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-500 hover:text-white hover:bg-[#ffa31a] transition-colors duration-300"
             >
-              Agendar cita
+              {buttonText}
             </a>
           </div>
         </div>

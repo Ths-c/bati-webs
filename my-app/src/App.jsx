@@ -6,7 +6,12 @@ function App() {
 
   return (
     <div>
-      <MainHero />
+      <MainHero
+        title="Transforma tus ideas en"
+        highlightedWord="realidad"
+        buttonText="Agendar cita"
+        buttonLink="#"
+      />
     </div>
   )
 }
