@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import MainHero from "./component/layout/heroes/MainHero";
 import ServiceSectionm from './component/layout/section/ServiceSection'
+import WhyUsSection from './component/layout/section/whyUsSection';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         buttonLink="#"
       />
       <ServiceSectionm />
+      <WhyUsSection />
     </div>
   )
 }
