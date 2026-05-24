@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import MainHero from "./component/layout/heroes/MainHero";
+import ServiceSectionm from './component/layout/section/ServiceSection'
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         buttonText="Agendar cita"
         buttonLink="#"
       />
+      <ServiceSectionm />
     </div>
   )
 }
