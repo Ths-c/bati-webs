@@ -4,7 +4,7 @@ import SplitText from "../../effect/SplitText";
 
 export default function whyUsSection({ title = "¿Por qué elegirnos?" }) {
     return (
-        <div className="flex flex-col items-center gap-12 lg:flex-row mt-20">
+        <div className="flex flex-col items-center gap-12 mt-20">
             <SplitText
                 text={title}
                 className="text-3xl inline-block font-semibold  w-90"
@@ -19,9 +19,9 @@ export default function whyUsSection({ title = "¿Por qué elegirnos?" }) {
                 textAlign="left"
                 showCallback
             />
-            <div className="h-600">
+            <div className="h-fit">
                 <Carousel
-                    baseWidth={300}
+                    baseWidth='85vw'
                     autoplay={false}
                     autoplayDelay={3000}
                     pauseOnHover={false}

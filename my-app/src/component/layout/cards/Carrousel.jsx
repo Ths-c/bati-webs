@@ -13,26 +13,26 @@ const DEFAULT_ITEMS = [
     icon: <FiFileText className="h-[16px] w-[16px] text-white" />
   },
   {
-    title: 'A ',
-    description: 'Smooth animations for your projects.',
+    title: 'Opciones de pago adaptadas a usted.',
+    description: 'Puede pagar en cuotas o en un solo pago, lo que se adapte mejor a sus necesidades.',
     id: 2,
     icon: <FiCircle className="h-[16px] w-[16px] text-white" />
   },
   {
-    title: 'Components',
-    description: 'Reusable components for your projects.',
+    title: 'Equipo capacitado',
+    description: 'Nuestro equipo está compuesto por profesionales capacitados en sus respectivas áreas, lo que garantiza un trabajo de calidad y resultados excepcionales.',
     id: 3,
     icon: <FiLayers className="h-[16px] w-[16px] text-white" />
   },
   {
-    title: 'Backgrounds',
-    description: 'Beautiful backgrounds and patterns for your projects.',
+    title: 'Diseño responsive 100% adaptable a cualquier dispositivo.',
+    description: 'Nos comprometemos a que nuestro diseño sea completamente responsivo y se adapte a cualquier dispositivo, garantizando una excelente experiencia de usuario en todos los entornos.',
     id: 4,
     icon: <FiLayout className="h-[16px] w-[16px] text-white" />
   },
   {
-    title: 'Common UI',
-    description: 'Common UI components are coming soon!',
+    title: 'Precios adaptados a su presupuesto.',
+    description: 'Ofrecemos opciones de pago flexibles para que se ajusten a tu presupuesto y necesidades.',
     id: 5,
     icon: <FiCode className="h-[16px] w-[16px] text-white" />
   }
@@ -52,8 +52,8 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
     <motion.div
       key={`${item?.id ?? index}-${index}`}
       className={`relative shrink-0 flex flex-col ${round
-          ? 'items-center justify-center text-center bg-[#120F17] border-0'
-          : 'items-start justify-between bg-[#222] border border-[#222] rounded-[12px]'
+        ? 'items-center justify-center text-center bg-[#120F17] border-0'
+        : 'items-start bg-[#222] border border-[#222] rounded-[12px]'
         } overflow-hidden cursor-grab active:cursor-grabbing`}
       style={{
         width: itemWidth,
@@ -68,7 +68,7 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
           <img
             src={item.image}
             alt={item.title}
-            className="hidden sm:block w-full h-40 object-cover rounded-xl mb-4"
+            className="hidden sm:block w-full h-full object-cover rounded-xl "
           />
         ) : (
           <span className="flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#120F17]">
@@ -94,7 +94,13 @@ export default function Carousel({
   round = false
 }) {
   const containerPadding = 16;
-  const itemWidth = baseWidth - containerPadding * 2;
+  const numericBaseWidth =
+    typeof baseWidth === 'number'
+      ? baseWidth
+      : window.innerWidth * 0.85;
+
+  const itemWidth = numericBaseWidth - containerPadding * 2;
+
   const trackItemOffset = itemWidth + GAP;
   const itemsForRender = useMemo(() => {
     if (!loop) return items;
@@ -219,11 +225,18 @@ export default function Carousel({
   return (
     <div
       ref={containerRef}
-      className={`relative overflow-hidden p-4 ${round ? 'rounded-full border border-white' : 'rounded-[24px] border border-[#222]'
+      className={`relative overflow-hidden p-4 ${round ? 'rounded-full border border-white' : 'none'
         }`}
       style={{
-        width: `${baseWidth}px`,
-        ...(round && { height: `${baseWidth}px` })
+        width: typeof baseWidth === 'number'
+          ? `${baseWidth}px`
+          : baseWidth,
+
+        ...(round && {
+          height: typeof baseWidth === 'number'
+            ? `${baseWidth}px`
+            : baseWidth
+        })
       }}
     >
       <motion.div
@@ -231,7 +244,7 @@ export default function Carousel({
         drag={isAnimating ? false : 'x'}
         {...dragProps}
         style={{
-          width: itemWidth,
+          width: `${itemWidth}px`,
           gap: `${GAP}px`,
           perspective: 1000,
           perspectiveOrigin: `${position * trackItemOffset + itemWidth / 2}px 50%`,
@@ -257,17 +270,17 @@ export default function Carousel({
         ))}
       </motion.div>
       <div className={`flex w-full justify-center ${round ? 'absolute z-20 bottom-12 left-1/2 -translate-x-1/2' : ''}`}>
-        <div className="mt-4 flex w-[150px] justify-between px-8">
+        <div className="mt-4 flex w-[250px] justify-between px-8">
           {items.map((_, index) => (
             <motion.div
               key={index}
-              className={`h-2 w-2 rounded-full cursor-pointer transition-colors duration-150 ${activeIndex === index
-                  ? round
-                    ? 'bg-white'
-                    : 'bg-[#333333]'
-                  : round
-                    ? 'bg-[#555]'
-                    : 'bg-[rgba(51,51,51,0.4)]'
+              className={`h-4 w-4 rounded-full cursor-pointer transition-colors duration-150 ${activeIndex === index
+                ? round
+                  ? 'bg-white'
+                  : 'bg-[#333333]'
+                : round
+                  ? 'bg-[#555]'
+                  : 'bg-[rgba(51,51,51,0.4)]'
                 }`}
               animate={{
                 scale: activeIndex === index ? 1.2 : 1
