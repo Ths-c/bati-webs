@@ -8,7 +8,7 @@ export default function ServiceSection() {
             <div className="ml-10 w-full">
                 <TrueFocus
                     sentence="CONCENTRATE EN LO IMPORTANTE"
-                    manualMode={true}
+                    manualMode={false}
                     blurAmount={5}
                     borderColor="#ffa31a"
                     animationDuration={0.5}

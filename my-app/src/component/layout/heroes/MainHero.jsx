@@ -1,9 +1,7 @@
 import React from 'react';
 import SplitText from "../../effect/SplitText";
 import MenuIcon from "../../../assets/icons/menuMobile.svg";
-import logo from '../../../assets/logo/download.jpg';
 import AnimatedList from '../../effect/AnimatedList'
-import CardNav from '../nav/CardNav'
 import { m } from 'motion/react';
 import { title } from 'motion/react-client';
 
@@ -16,58 +14,6 @@ const firstAnimationTime =
   duration + text1.length * delayPerChar;
 
 
-const navigation = [
-  { name: 'Servicios', href: '#' },
-  { name: 'Sobre Nosotros', href: '#' },
-  { name: 'Contacto', href: '#' },
-];
-
-const App = () => {
-  const items = [
-    {
-      label: "About",
-      bgColor: "#1B1722",
-      textColor: "#fff",
-      links: [
-        { label: "Company", ariaLabel: "About Company" },
-        { label: "Careers", ariaLabel: "About Careers" }
-      ]
-    },
-    {
-      label: "Projects",
-      bgColor: "#2F293A",
-      textColor: "#fff",
-      links: [
-        { label: "Featured", ariaLabel: "Featured Projects" },
-        { label: "Case Studies", ariaLabel: "Project Case Studies" }
-      ]
-    },
-    {
-      label: "Contact",
-      bgColor: "#2F293A",
-      textColor: "#fff",
-      links: [
-        { label: "Email", ariaLabel: "Email us" },
-        { label: "Twitter", ariaLabel: "Twitter" },
-        { label: "LinkedIn", ariaLabel: "LinkedIn" }
-      ]
-    }
-  ];
-
-  return (
-    <CardNav
-      logo={logo}
-      logoAlt="Company Logo"
-      items={items}
-      baseColor="#fff"
-      menuColor="#000"
-      buttonBgColor="#111"
-      buttonTextColor="#fff"
-      ease="power3.out"
-      theme="light"
-    />
-  );
-};
 
 export default function MainHero({ title, highlightedWord, buttonText, buttonLink }) {
 
@@ -76,30 +22,6 @@ export default function MainHero({ title, highlightedWord, buttonText, buttonLin
   return (
     <section>
       <div className="mx-auto max-w-7xl flex flex-col items-center gap-12 lg:flex-row">
-        <nav className='flex justify-between w-full'>
-          <CardNav
-            logo={logo}
-            logoAlt="Bati Website Logo"
-            items={navigation.map((item) => ({
-              label: item.name,
-              bgColor: '#1f2937',
-              textColor: '#ffffff',
-              links: [
-                {
-                  label: item.name,
-                  href: item.href,
-                  ariaLabel: item.name,
-                },
-              ],
-            }))}
-            baseColor="#fff"
-            menuColor="#000"
-            buttonBgColor="#111"
-            buttonTextColor="#fff"
-            ease="power3.out"
-            theme="light"
-          />
-        </nav>
         <div className="text-center mt-15">
           <SplitText
             text={title}
