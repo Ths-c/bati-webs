@@ -7,6 +7,7 @@ import CardNav from "./component/layout/nav/CardNav";
 import ContactUsSection from "./component/layout/section/ContactUsSection";
 import BatPreloader from "./component/layout/preloader/BatPreloader";
 import { useState, useRef } from "react";
+import Footer from "./component/layout/footer/FooterSection";
 
 function App() {
   const navigation = [
@@ -57,19 +58,26 @@ function App() {
         buttonText="Agendar cita"
         buttonLink="#Agendar"
       />
+
       <div id="servicios">
         <ServiceSection />
       </div>
+
       <div id="sobre-nosotros">
         <WhyUsSection />
       </div>
+
       <div id="precios">
         <PricesSection />
       </div>
+
       <CalendarSection />
+
       <div id="contacto">
         <ContactUsSection />
       </div>
+
+      <Footer />
     </div>
   );
 }

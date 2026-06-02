@@ -3,7 +3,7 @@ export default function Bat({ flying = true }) {
     <div className="flex items-center justify-center">
       <svg
         viewBox="0 0 200 120"
-        className="w-32 h-32 animate-[batFloat_2.5s_ease-in-out_infinite]"
+        className="w-32 h-32 animate-[batFloat_1s_ease-in-out_infinite]"
       >
         {/* Ala izquierda */}
         <g
