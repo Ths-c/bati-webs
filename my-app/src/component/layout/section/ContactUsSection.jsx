@@ -1,22 +1,18 @@
 import { useState } from "react";
 
 export default function ContactSimpleForm() {
-  const [selectedCountryPhone, setSelectedCountryPhone] = useState("US");
-
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const formData = Object.fromEntries(
-      new FormData(e.currentTarget)
-    );
+    const formData = Object.fromEntries(new FormData(e.currentTarget));
 
     try {
-      const response = await fetch("http://localhost:3000/api/contact", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
@@ -32,22 +28,15 @@ export default function ContactSimpleForm() {
   }
 
   return (
-    <section className="py-16">
+    <section className="py-16 bg-gray-100">
       <div className="max-w-2xl mx-auto px-4">
-
-        <h2 className="text-4xl font-bold mb-2">
-          Contacto
-        </h2>
+        <h2 className="text-4xl font-bold mb-2">Contacto</h2>
 
         <p className="text-gray-400 mb-10">
           Completa el formulario y te responderemos pronto.
         </p>
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-6"
-        >
-
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <div className="flex gap-4">
             <input
               required
@@ -90,26 +79,22 @@ export default function ContactSimpleForm() {
             className="border p-3 rounded"
           />
 
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="privacy"
-              required
-            />
-
-            <span>
-              Acepto la política de privacidad
-            </span>
-          </label>
-
-          <button
-            type="submit"
-            className="bg-black text-white py-3 rounded"
-          >
+          <button type="submit" className="bg-black text-white py-3 rounded">
             Enviar mensaje
           </button>
-
         </form>
+
+        <p className="text-gray-600 my-10">
+          ¿O prefieres contactarnos por WhatsApp?
+        </p>
+        <a
+          href="https://wa.me/5492921421616"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-[#25D366] text-white py-3 px-6 rounded-full hover:bg-[#128C7E] lg:transition lg:duration-300"
+        >
+          Enviar mensaje a WhatsApp
+        </a>
       </div>
     </section>
   );

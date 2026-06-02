@@ -4,3 +4,33 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
+
+@keyframes batFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes batWingLeft {
+  from {
+    transform: rotate(-10deg);
+  }
+  to {
+    transform: rotate(20deg);
+  }
+}
+
+@keyframes batWingRight {
+  from {
+    transform: rotate(10deg);
+  }
+  to {
+    transform: rotate(-20deg);
+  }
+}

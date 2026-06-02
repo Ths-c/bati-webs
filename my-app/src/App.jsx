@@ -4,8 +4,9 @@ import WhyUsSection from "./component/layout/section/whyUsSection";
 import PricesSection from "./component/layout/section/PricesSection";
 import CalendarSection from "./component/layout/section/CalendarSection";
 import CardNav from "./component/layout/nav/CardNav";
-import logo from "./assets/logo/download.jpg";
 import ContactUsSection from "./component/layout/section/ContactUsSection";
+import BatPreloader from "./component/layout/preloader/BatPreloader";
+import { useState, useRef } from "react";
 
 function App() {
   const navigation = [
@@ -13,13 +14,23 @@ function App() {
     { name: "Sobre Nosotros", href: "#sobre-nosotros" },
     { name: "Contacto", href: "#contacto" },
   ];
+  const logoRef = useRef(null);
+  const [loading, setLoading] = useState(true);
 
   return (
     <div>
+    {
+      loading && (
+        <BatPreloader
+          logoRef={logoRef}
+         onFinish={() => setLoading(false)}
+        />
+      )
+    }
+
       <div className="sticky top-4 z-9999 w-full flex justify-center">
         <CardNav
-          logo={logo}
-          logoAlt="Bati Website Logo"
+          logoRef={logoRef}
           items={navigation.map((item) => ({
             label: item.name,
             bgColor: "#1f2937",
