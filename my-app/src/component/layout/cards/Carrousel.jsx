@@ -57,7 +57,7 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
         } overflow-hidden cursor-grab active:cursor-grabbing`}
       style={{
         width: itemWidth,
-        height: round ? itemWidth : '100%',
+        height: round ? itemWidth : 'fit-content',
         rotateY: rotateY,
         ...(round && { borderRadius: '50%' })
       }}

@@ -20,14 +20,14 @@ function App() {
 
   return (
     <div>
-    {
+    {/* {
       loading && (
         <BatPreloader
           logoRef={logoRef}
          onFinish={() => setLoading(false)}
         />
       )
-    }
+    } */}
 
       <div className="sticky top-4 z-9999 w-full flex justify-center">
         <CardNav
@@ -54,7 +54,7 @@ function App() {
 
       <MainHero
         title="Transforma tus ideas en"
-        highlightedWord="realidad"
+        highlightedWord="REALIDAD"
         buttonText="Agendar cita"
         buttonLink="#Agendar"
       />
@@ -71,7 +71,7 @@ function App() {
         <PricesSection />
       </div>
 
-      <CalendarSection />
+      {/* <CalendarSection /> */}
 
       <div id="contacto">
         <ContactUsSection />
