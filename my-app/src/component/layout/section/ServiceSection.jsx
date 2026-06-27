@@ -47,8 +47,7 @@ export default function ServiceSection() {
                         <h3 className="text-lg font-semibold mb-2">Aplicaciones móbiles</h3>
                         <h4 className="text-gray-800">Creación o migración de aplicaciones al entorno móbil</h4>
                         <ul className="list-disc list-inside text-gray-600 mt-2">
-                            <li>Aplicaciones de compra.</li>
-                            <li>Expansión de clientes.</li>
+                            <li>Migracion de aplicaciones para lograr un mayor rango de clientela.</li>
                             <li>SOLO ANDROID</li>
                         </ul>
                     </div>

@@ -21,7 +21,7 @@ export default function whyUsSection({ title = "¿Por qué elegirnos?" }) {
             />
             <div className="h-fit">
                 <Carousel
-                    baseWidth='85vw'
+                    baseWidth='85vw lg:55vw'
                     autoplay={false}
                     autoplayDelay={3000}
                     pauseOnHover={false}

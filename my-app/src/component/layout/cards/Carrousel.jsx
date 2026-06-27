@@ -1,8 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useMotionValue, useTransform } from 'motion/react';
 // replace icons with your own if needed
-import { FiCircle, FiCode, FiFileText, FiLayers, FiLayout } from 'react-icons/fi';
+import { FiCircle, FiCode, FiFigma, FiLayers, FiLayout } from 'react-icons/fi';
+import { FaCommentDollar } from "react-icons/fa";
 import FigmaImg from '../../../assets/img/figma-bundle-ej.avif';
+import DollarWasting from '../../../assets/img/dollar-wasting.svg'
+import HelpAsis from '../../../assets/img/help.svg'
+
 
 const DEFAULT_ITEMS = [
   {
@@ -10,18 +14,20 @@ const DEFAULT_ITEMS = [
     description: 'Te damos un diseño previo de tu proyecto para que puedas visualizarlo antes de su realización para evitarte malas sorpresas en el diseño final.',
     id: 1,
     image: FigmaImg,
-    icon: <FiFileText className="h-[16px] w-[16px] text-white" />
+    icon: <FiFigma className="h-[16px] w-[16px] text-white" />
   },
   {
     title: 'Opciones de pago adaptadas a usted.',
     description: 'Puede pagar en cuotas o en un solo pago, lo que se adapte mejor a sus necesidades.',
     id: 2,
-    icon: <FiCircle className="h-[16px] w-[16px] text-white" />
+    image: DollarWasting,
+    icon: <FaCommentDollar className='size-[16px] text-white' />
   },
   {
     title: 'Equipo capacitado',
     description: 'Nuestro equipo está compuesto por profesionales capacitados en sus respectivas áreas, lo que garantiza un trabajo de calidad y resultados excepcionales.',
     id: 3,
+    image: HelpAsis,
     icon: <FiLayers className="h-[16px] w-[16px] text-white" />
   },
   {
@@ -53,11 +59,11 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
       key={`${item?.id ?? index}-${index}`}
       className={`relative shrink-0 flex flex-col ${round
         ? 'items-center justify-center text-center bg-[#120F17] border-0'
-        : 'items-start bg-[#222] border border-[#222] rounded-[12px]'
+        : 'items-start bg-[#222] border border-[#222] rounded-[12px] w-full lg:w-[55vw]'
         } overflow-hidden cursor-grab active:cursor-grabbing`}
-      style={{
-        width: itemWidth,
-        height: round ? itemWidth : 'fit-content',
+      classNme={{
+        width: 'w-[85vw] lg:60vw',
+        height: round ? itemWidth : '70vh',
         rotateY: rotateY,
         ...(round && { borderRadius: '50%' })
       }}
@@ -68,7 +74,7 @@ function CarouselItem({ item, index, itemWidth, round, trackItemOffset, x, trans
           <img
             src={item.image}
             alt={item.title}
-            className="hidden sm:block w-full h-full object-cover rounded-xl "
+            className="hidden sm:block w-full h-[55vh] rounded-xl select-none"
           />
         ) : (
           <span className="flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#120F17]">
