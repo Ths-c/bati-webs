@@ -35,7 +35,7 @@ export default function PricesSection() {
         loop
         navigation
         pagination={{ clickable: true }}
-        className="w-full h-full sm:h-180"
+        className="w-full h-full lg:h-[600px] sm:h-180"
         onSlideChange={(swiper) => {
           setActiveSlide(swiper.realIndex);
         }}
@@ -51,8 +51,8 @@ export default function PricesSection() {
               className="text-4xl mt-8"
             />
             <SpotlightCard
-              className="sm:hover:scale-110 transition-transform w-80"
-              spotlightColor="rgba(255, 255, 255, 0.15)"
+              className="sm:hover:scale-110 transition-transform w-80 lg:w-[70vw] bg-black"
+              
             >
               <div className="flex flex-col items-start gap-4">
                 <h4 className="text-gray-400 text-sm">
@@ -111,8 +111,8 @@ export default function PricesSection() {
               className="text-4xl text-center w-70 mt-8"
             />
             <SpotlightCard
-              className="sm:hover:scale-110 transition-transform w-80"
-              spotlightColor="rgba(255, 255, 255, 0.15)"
+              className="sm:hover:scale-110 transition-transform w-80 lg:w-[70vw] bg-black"
+              
             >
               <div className="flex flex-col items-start gap-4">
                 <h4 className="text-gray-400 text-sm">
@@ -170,8 +170,8 @@ export default function PricesSection() {
               className="text-4xl text-center w-90 mt-8"
             />
             <SpotlightCard
-              className="sm:hover:scale-110 transition-transform w-80"
-              spotlightColor="rgba(255, 255, 255, 0.15)"
+              className="sm:hover:scale-110 transition-transform w-80 lg:w-[70vw] bg-black"
+              
             >
               <div className="flex flex-col items-start gap-4">
                 <h4 className="text-gray-400 text-sm">
@@ -232,8 +232,8 @@ export default function PricesSection() {
               className="text-4xl text-center w-70 mt-8"
             />
             <SpotlightCard
-              className="sm:hover:scale-110 transition-transform w-80"
-              spotlightColor="rgba(255, 255, 255, 0.15)"
+              className="sm:hover:scale-110 transition-transform w-80 lg:w-[70vw] bg-black"
+              
             >
               <div className="flex flex-col items-start gap-4">
                 <h4 className="text-gray-400 text-sm">
@@ -272,7 +272,7 @@ export default function PricesSection() {
           </div>
         </SwiperSlide>
       </Swiper>
-      <h4 className="text-gray-700 italic text-lg w-90">
+      <h4 className="text-gray-700 text-center italic text-lg w-90 lg:w-full">
         * En el caso de llegar a necesitar un servicio distinto a los anteriormente propuestos, pongase en contacto con nosotros para charlas los precios y la disponibilidad!!
       </h4>
     </div>

@@ -37,7 +37,7 @@ export default function MainHero({ title, highlightedWord, buttonText, buttonLin
           />
           <SplitText
             text={highlightedWord}
-            className="inline-block font-semibold w-90 text-[#ffa31a]"
+            className="inline-block font-semibold w-90 text-[#ee9209]"
             delay={50}
             duration={1.25}
             ease="power3.out"

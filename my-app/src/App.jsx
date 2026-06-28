@@ -5,6 +5,7 @@ import PricesSection from "./component/layout/section/PricesSection";
 import CalendarSection from "./component/layout/section/CalendarSection";
 import CardNav from "./component/layout/nav/CardNav";
 import ContactUsSection from "./component/layout/section/ContactUsSection";
+import AboutUs from './component/layout/section/AboutUs'
 import BatPreloader from "./component/layout/preloader/BatPreloader";
 import { useState, useRef } from "react";
 import Footer from "./component/layout/footer/FooterSection";
@@ -59,13 +60,17 @@ function App() {
         buttonLink="#Agendar"
       />
 
+      <div id="sobre-nosotros">
+        <AboutUs/>
+      </div>
+
       <div id="servicios">
         <ServiceSection />
       </div>
 
-      <div id="sobre-nosotros">
-        <WhyUsSection />
-      </div>
+
+
+      <WhyUsSection />
 
       <div id="precios">
         <PricesSection />
