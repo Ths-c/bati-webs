@@ -3,8 +3,8 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  color-scheme: light;
 }
-
 @keyframes batFloat {
   0% {
     transform: translateY(0px);

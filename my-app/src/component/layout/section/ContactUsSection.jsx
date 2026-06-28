@@ -28,7 +28,7 @@ export default function ContactSimpleForm() {
   }
 
   return (
-    <section className="py-16 bg-gray-100">
+    <section className="mt-20 py-16 bg-gray-100">
       <div className="max-w-2xl mx-auto px-4">
         <h2 className="text-4xl font-bold mb-2">Contacto</h2>
 

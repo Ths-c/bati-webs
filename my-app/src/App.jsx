@@ -21,14 +21,14 @@ function App() {
 
   return (
     <div>
-    {/* {
+    {
       loading && (
         <BatPreloader
           logoRef={logoRef}
          onFinish={() => setLoading(false)}
         />
       )
-    } */}
+    }
 
       <div className="sticky top-4 z-9999 w-full flex justify-center">
         <CardNav
@@ -76,7 +76,7 @@ function App() {
         <PricesSection />
       </div>
 
-      {/* <CalendarSection /> */}
+      <CalendarSection />
 
       <div id="contacto">
         <ContactUsSection />
