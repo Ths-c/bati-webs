@@ -56,7 +56,7 @@ export default function PricesSection() {
             >
               <div className="flex flex-col items-start gap-4">
                 <h4 className="text-gray-400 text-sm">
-                  Pagina pensada para convertir visitantes en clientes
+                  Página pensada para convertir visitantes en clientes
                   potenciales, con un diseño atractivo y funcional que resalta
                   tu propuesta de valor. Diseño funcional con figma antes del
                   desarrollo del proyecto sin cargo.
@@ -89,9 +89,9 @@ export default function PricesSection() {
                   <p className="mb-2">
                     Los precios pueden variar dependiendo de:
                   </p>
-                  <li>Numero de secciones.</li>
+                  <li>Número de secciones.</li>
                   <li>Formularios.</li>
-                  <li>Cantidad de animaciones y su customizacion.</li>
+                  <li>Cantidad de animaciones y su personalización.</li>
                 </ul>
                 <h4 className="text-gray-400 italic text-sm">
                   * Todo se define en una reunión para ajustar el precio final.
@@ -116,7 +116,7 @@ export default function PricesSection() {
             >
               <div className="flex flex-col items-start gap-4">
                 <h4 className="text-gray-400 text-sm">
-                  Opcion economica de tienda online, desarrollada en Shopify,
+                  Opción económica de tienda online, desarrollada en Shopify,
                   con diseño customizable.
                 </h4>
                 <div className="w-full h-20 flex items-center justify-center text-4xl rounded-lg bg-white">
@@ -149,8 +149,8 @@ export default function PricesSection() {
                   </p>
                   <li>Número de productos.</li>
                   <li>Integraciones de pago.</li>
-                  <li>Cantidad de animaciones y su customizacion.</li>
-                  <li>Complejidad tecnica del diseño.</li>
+                  <li>Cantidad de animaciones y su personalización.</li>
+                  <li>Complejidad técnica del diseño.</li>
                 </ul>
                 <h4 className="text-gray-400 italic text-sm">
                   * Todo se define en una reunión para ajustar el precio final.
@@ -176,7 +176,7 @@ export default function PricesSection() {
               <div className="flex flex-col items-start gap-4">
                 <h4 className="text-gray-400 text-sm">
                   Tu tienda online personalizada, desarrollada en React y con
-                  las ultimas tecnologias, con funcionalidades avanzadas para
+                  las últimas tecnologías, con funcionalidades avanzadas para
                   una experiencia de compra única.
                 </h4>
                 <div className="w-full h-20 flex items-center justify-center text-4xl rounded-lg bg-white">
@@ -207,10 +207,10 @@ export default function PricesSection() {
                   <p className="mb-2">
                     Los precios pueden variar dependiendo de:
                   </p>
-                  <li>Complejidad tecnica de la base de datos.</li>
+                  <li>Complejidad técnica de la base de datos.</li>
                   <li>Animaciones complejas.</li>
                   <li>
-                    Integraciones de metodos de pago y/o login con google.
+                    Integraciones de métodos de pago y/o login con Google.
                   </li>
                   <li>Roles de usuario y permisos avanzados.</li>
                 </ul>
@@ -239,7 +239,7 @@ export default function PricesSection() {
                 <h4 className="text-gray-400 text-sm">
                   Herramienta digital con el objetivo de optimizar y automatizar
                   procesos internos de tu negocio, como el control de stock, la
-                  gestion de clientes/empleados, etc. Plenamente adaptado a sus
+                  gestión de clientes/empleados, etc. Plenamente adaptado a sus
                   necesidades.
                 </h4>
                 <div className="w-full h-20 flex items-center justify-center text-4xl rounded-lg bg-white">
@@ -260,7 +260,7 @@ export default function PricesSection() {
                   <p className="mb-2">
                     Los precios pueden variar dependiendo de:
                   </p>
-                  <li>Integracion y complejidad de APIs requeridas.</li>
+                  <li>Integración y complejidad de APIs requeridas.</li>
                   <li>Roles de usuario y permisos avanzados.</li>
                   <li>Cantidad de funcionalidades.</li>
                 </ul>
@@ -273,7 +273,7 @@ export default function PricesSection() {
         </SwiperSlide>
       </Swiper>
       <h4 className="text-gray-700 text-center italic text-lg w-90 lg:w-full">
-        * En el caso de llegar a necesitar un servicio distinto a los anteriormente propuestos, pongase en contacto con nosotros para charlas los precios y la disponibilidad!!
+        * En el caso de llegar a necesitar un servicio distinto a los anteriormente propuestos, póngase en contacto con nosotros para charlar los precios y la disponibilidad.
       </h4>
     </div>
   );
