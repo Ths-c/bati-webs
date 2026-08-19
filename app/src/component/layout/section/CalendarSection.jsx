@@ -23,7 +23,7 @@ export default function CalendarSection() {
       <div className="w-90 h-screen">
         <Cal
           namespace="consulta"
-          calLink="bati-webs-e5vznt/consulta"
+          calLink="ignitex-e5vznt/consulta"
           style={{
             width: "100%",
             height: "100%",

@@ -1,56 +1,56 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import Bat from "./Bat";
+import FlameLogo from "./FlameLogo";
 import BlurText from "../../effect/BlurText";
 
-export default function BatPreloader({ logoRef, onFinish }) {
+export default function FlamePreloader({ logoRef, onFinish }) {
   const overlayRef = useRef(null);
-  const batRef = useRef(null);
+  const flameRef = useRef(null);
 
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
 
     const flightDistance = isMobile ? 120 : 220;
 
-    if (!batRef.current) return;
+    if (!flameRef.current) return;
 
     const flight = gsap.timeline({ repeat: -1 });
 
     const logoRect = logoRef.current.getBoundingClientRect();
 
-    const batRect = batRef.current.getBoundingClientRect();
+    const flameRect = flameRef.current.getBoundingClientRect();
 
     const dx =
-      logoRect.left + logoRect.width / 2 - (batRect.left + batRect.width / 2);
+      logoRect.left + logoRect.width / 2 - (flameRect.left + flameRect.width / 2);
 
     const dy =
-      logoRect.top + logoRect.height / 2 - (batRect.top + batRect.height / 2);
+      logoRect.top + logoRect.height / 2 - (flameRect.top + flameRect.height / 2);
 
     flight
-      .to(batRef.current, {
+      .to(flameRef.current, {
         x: flightDistance,
         y: -120,
         duration: 1.5,
         ease: "sine.inOut",
       })
-      .to(batRef.current, {
+      .to(flameRef.current, {
         x: -flightDistance,
         y: -120,
         duration: 1.5,
         ease: "sine.inOut",
       })
-      .to(batRef.current, {
+      .to(flameRef.current, {
         x: 0,
         y: 0,
         duration: 2,
         ease: "sine.inOut",
       })
-      .to(batRef.current, {
+      .to(flameRef.current, {
         scale: 10,
         duration: 2,
         ease: "sine.inOut",
       })
-      .to(batRef.current, {
+      .to(flameRef.current, {
         x: `+=${dx}`,
         y: `+=${dy}`,
         scale: 0.5,
@@ -86,12 +86,12 @@ export default function BatPreloader({ logoRef, onFinish }) {
       "
     >
       <BlurText
-        text="BATI-WEBS"
+        text="IGNITEX"
         delay={2000}
         className="text-4xl font-bold text-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
       />
       <div
-        ref={batRef}
+        ref={flameRef}
         className="
           absolute
           left-1/2
@@ -100,7 +100,7 @@ export default function BatPreloader({ logoRef, onFinish }) {
           -translate-y-1/2
         "
       >
-        <Bat />
+        <FlameLogo />
       </div>
     </div>
   );

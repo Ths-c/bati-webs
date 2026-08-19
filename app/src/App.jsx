@@ -6,7 +6,7 @@ import CalendarSection from "./component/layout/section/CalendarSection";
 import CardNav from "./component/layout/nav/CardNav";
 import ContactUsSection from "./component/layout/section/ContactUsSection";
 import AboutUs from './component/layout/section/AboutUs'
-import BatPreloader from "./component/layout/preloader/BatPreloader";
+import FlamePreloader from "./component/layout/preloader/FlamePreloader";
 import { useState, useRef } from "react";
 import Footer from "./component/layout/footer/FooterSection";
 
@@ -23,7 +23,7 @@ function App() {
     <div>
     {
       loading && (
-        <BatPreloader
+        <FlamePreloader
           logoRef={logoRef}
          onFinish={() => setLoading(false)}
         />
