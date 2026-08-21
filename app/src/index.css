@@ -165,6 +165,19 @@ body {
 
 /* ---------- Utilities ---------- */
 
+.split-line {
+  display: block;
+}
+
+.split-word,
+.split-char {
+  display: inline-block;
+}
+
+.split-char {
+  white-space: pre;
+}
+
 .text-fire {
   background: linear-gradient(
     100deg,

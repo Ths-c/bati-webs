@@ -28,6 +28,7 @@ export default function MainHero({ title, highlightedWord, buttonText, buttonLin
         <h1 className="font-extrabold uppercase leading-[1.05] tracking-tight text-5xl sm:text-6xl lg:text-8xl">
           <SplitText
             text={title}
+            tag="span"
             className="inline-block mr-4 align-top"
             delay={45}
             duration={1.25}
@@ -41,6 +42,7 @@ export default function MainHero({ title, highlightedWord, buttonText, buttonLin
           />
           <SplitText
             text={highlightedWord}
+            tag="span"
             className="text-fire inline-block align-top drop-shadow-[0_0_35px_rgba(255,107,26,0.45)]"
             delay={45}
             duration={1.25}

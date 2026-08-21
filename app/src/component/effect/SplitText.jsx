@@ -22,60 +22,54 @@ const SplitText = ({
   onLetterAnimationComplete
 }) => {
   const ref = useRef(null);
-  const animationCompletedRef = useRef(false);
+  const completedRef = useRef(false);
   const onCompleteRef = useRef(onLetterAnimationComplete);
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  // Keep callback ref updated
   useEffect(() => {
     onCompleteRef.current = onLetterAnimationComplete;
   }, [onLetterAnimationComplete]);
 
   useEffect(() => {
-    if (document.fonts.status === 'loaded') {
-      setFontsLoaded(true);
+    let active = true;
+    const markLoaded = () => {
+      if (active) setFontsLoaded(true);
+    };
+    if (!document.fonts || document.fonts.status === 'loaded') {
+      markLoaded();
     } else {
-      document.fonts.ready.then(() => {
-        setFontsLoaded(true);
-      });
+      document.fonts.ready.then(markLoaded);
     }
+    return () => {
+      active = false;
+    };
   }, []);
 
   useGSAP(
     () => {
-      if (!ref.current || !text || !fontsLoaded) return;
-      // Prevent re-animation if already completed
-      if (animationCompletedRef.current) return;
       const el = ref.current;
+      if (!el || !text || !fontsLoaded || completedRef.current) return;
 
-      if (el._rbsplitInstance) {
-        try {
-          el._rbsplitInstance.revert();
-        } catch (_) {
-          /* ignore */
+      let marginPx = 0;
+      const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin ?? '');
+      if (marginMatch) {
+        const value = parseFloat(marginMatch[1]);
+        const unit = marginMatch[2] || 'px';
+        if (unit === '%') {
+          // los porcentajes se resuelven contra el viewport al momento del trigger
+          marginPx = (value / 100) * (typeof window !== 'undefined' ? window.innerHeight : 800);
+        } else {
+          const factor =
+            unit === 'em'
+              ? parseFloat(getComputedStyle(el).fontSize) || 16
+              : unit === 'rem'
+                ? parseFloat(getComputedStyle(document.documentElement).fontSize) || 16
+                : 1;
+          marginPx = value * factor;
         }
-        el._rbsplitInstance = null;
       }
 
-      const startPct = (1 - threshold) * 100;
-      const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
-      const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
-      const marginUnit = marginMatch ? marginMatch[2] || 'px' : 'px';
-      const sign =
-        marginValue === 0
-          ? ''
-          : marginValue < 0
-            ? `-=${Math.abs(marginValue)}${marginUnit}`
-            : `+=${marginValue}${marginUnit}`;
-      const start = `top ${startPct}%${sign}`;
-
-      let targets;
-      const assignTargets = self => {
-        if (splitType.includes('chars') && self.chars.length) targets = self.chars;
-        if (!targets && splitType.includes('words') && self.words.length) targets = self.words;
-        if (!targets && splitType.includes('lines') && self.lines.length) targets = self.lines;
-        if (!targets) targets = self.chars || self.words || self.lines;
-      };
+      const basePct = Math.max(0, Math.min(100, (1 - threshold) * 100));
 
       const splitInstance = new GSAPSplitText(el, {
         type: splitType,
@@ -86,10 +80,16 @@ const SplitText = ({
         charsClass: 'split-char',
         reduceWhiteSpace: false,
         onSplit: self => {
-          assignTargets(self);
+          const targets =
+            self.chars?.length ? self.chars
+            : self.words?.length ? self.words
+            : self.lines;
+
+          if (!targets || targets.length === 0) return null;
+
           return gsap.fromTo(
             targets,
-            { ...from },
+            { ...from, display: 'inline-block' },
             {
               ...to,
               duration,
@@ -97,33 +97,35 @@ const SplitText = ({
               stagger: delay / 1000,
               scrollTrigger: {
                 trigger: el,
-                start,
-                once: true,
-                fastScrollEnd: true,
-                anticipatePin: 0.4
+                start: () => {
+                  const vh = window.innerHeight || 800;
+                  // rootMargin negativo = disparar más tarde; positivo = más temprano
+                  const adjPct = (Math.abs(marginPx) / vh) * 100;
+                  const pct =
+                    marginPx < 0
+                      ? basePct - adjPct
+                      : basePct + adjPct;
+                  return `top ${Math.max(0, Math.min(100, pct))}%`;
+                },
+                once: true
               },
+              force3D: true,
+              clearProps: 'transform',
               onComplete: () => {
-                animationCompletedRef.current = true;
+                completedRef.current = true;
                 onCompleteRef.current?.();
-              },
-              willChange: 'transform, opacity',
-              force3D: true
+              }
             }
           );
         }
       });
-      el._rbsplitInstance = splitInstance;
 
       return () => {
-        ScrollTrigger.getAll().forEach(st => {
-          if (st.trigger === el) st.kill();
-        });
         try {
           splitInstance.revert();
-        } catch (_) {
-          /* ignore */
+        } catch {
+          /* noop */
         }
-        el._rbsplitInstance = null;
       };
     },
     {
@@ -146,10 +148,9 @@ const SplitText = ({
   const renderTag = () => {
     const style = {
       textAlign,
-      wordWrap: 'break-word',
-      willChange: 'transform, opacity'
+      wordBreak: 'break-word'
     };
-    const classes = `split-parent overflow-hidden inline-block whitespace-normal ${className}`;
+    const classes = `split-parent overflow-hidden whitespace-normal ${className}`;
     const Tag = tag || 'p';
 
     return (
@@ -158,6 +159,7 @@ const SplitText = ({
       </Tag>
     );
   };
+
   return renderTag();
 };
 
