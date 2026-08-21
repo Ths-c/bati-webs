@@ -10,9 +10,7 @@ const CardNav = ({
   className = '',
   ease = 'power3.out',
   baseColor = '#fff',
-  menuColor,
-  buttonBgColor,
-  buttonTextColor
+  menuColor
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -138,9 +136,10 @@ const CardNav = ({
     >
       <nav
         ref={navRef}
-        className={`card-nav ${isExpanded ? 'open' : ''} block h-[60px] p-0 rounded-xl shadow-md relative overflow-hidden will-change-[height]`}
+        className={`card-nav ${isExpanded ? 'open' : ''} block h-[60px] p-0 rounded-2xl shadow-[0_12px_40px_-12px_rgba(229,56,44,0.55)] border border-[rgba(255,107,26,0.28)] backdrop-blur-xl relative overflow-hidden will-change-[height]`}
         style={{ backgroundColor: baseColor }}
       >
+        <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-flame-orange/70 to-transparent" />
         <div className="card-nav-top inset-x-0 top-0 h-[60px] flex items-center justify-between p-2 pl-[1.1rem] z-[2]">
           <div
             className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} group h-full flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2 md:order-none`}
@@ -151,14 +150,14 @@ const CardNav = ({
             style={{ color: menuColor || '#000' }}
           >
             <div
-              className={`hamburger-line w-[30px] h-[2px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
+              className={`hamburger-line w-[30px] h-[2px] bg-current rounded-full transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
                 isHamburgerOpen ? 'translate-y-[4px] rotate-45' : ''
-              } group-hover:opacity-75`}
+              } group-hover:opacity-60`}
             />
             <div
-              className={`hamburger-line w-[30px] h-[2px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
+              className={`hamburger-line w-[30px] h-[2px] bg-current rounded-full transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
                 isHamburgerOpen ? '-translate-y-[4px] -rotate-45' : ''
-              } group-hover:opacity-75`}
+              } group-hover:opacity-60`}
             />
           </div>
 
@@ -177,22 +176,25 @@ const CardNav = ({
           {(items || []).slice(0, 3).map((item, idx) => (
             <div
               key={`${item.label}-${idx}`}
-              className="nav-card select-none relative flex flex-col gap-2 p-[12px_16px] rounded-[calc(0.75rem-0.2rem)] min-w-0 flex-[1_1_auto] h-auto min-h-[60px] md:h-full md:min-h-0 md:flex-[1_1_0%]"
+              className="nav-card select-none relative flex flex-col gap-2 p-[12px_16px] rounded-[calc(0.75rem-0.2rem)] min-w-0 flex-[1_1_auto] h-auto min-h-[60px] md:h-full md:min-h-0 md:flex-[1_1_0%] transition-shadow duration-300 hover:shadow-[inset_0_0_30px_rgba(255,107,26,0.15)]"
               ref={setCardRef(idx)}
               style={{ backgroundColor: item.bgColor, color: item.textColor }}
             >
-              <div className="nav-card-label font-normal tracking-[-0.5px] text-[18px] md:text-[22px]">
+              <div className="nav-card-label font-bold tracking-tight text-[18px] md:text-[20px]">
                 {item.label}
               </div>
               <div className="nav-card-links mt-auto flex flex-col gap-[2px]">
                 {item.links?.map((lnk, i) => (
                   <a
                     key={`${lnk.label}-${i}`}
-                    className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
+                    className="nav-card-link group/link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-colors duration-300 hover:text-flame-amber text-[15px] md:text-[16px]"
                     href={lnk.href}
                     aria-label={lnk.ariaLabel}
                   >
-                    <GoArrowUpRight className="nav-card-link-icon shrink-0" aria-hidden="true" />
+                    <GoArrowUpRight
+                      className="nav-card-link-icon shrink-0 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                      aria-hidden="true"
+                    />
                     {lnk.label}
                   </a>
                 ))}

@@ -5,8 +5,9 @@ import PricesSection from "./component/layout/section/PricesSection";
 import CalendarSection from "./component/layout/section/CalendarSection";
 import CardNav from "./component/layout/nav/CardNav";
 import ContactUsSection from "./component/layout/section/ContactUsSection";
-import AboutUs from './component/layout/section/AboutUs'
+import AboutUs from "./component/layout/section/AboutUs";
 import FlamePreloader from "./component/layout/preloader/FlamePreloader";
+import EmberField from "./component/effect/EmberField";
 import { useState, useRef } from "react";
 import Footer from "./component/layout/footer/FooterSection";
 
@@ -20,23 +21,27 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   return (
-    <div>
-    {
-      loading && (
+    <div className="relative min-h-screen bg-ember-bg text-ember-text">
+      {loading && (
         <FlamePreloader
           logoRef={logoRef}
-         onFinish={() => setLoading(false)}
+          onFinish={() => setLoading(false)}
         />
-      )
-    }
+      )}
+
+      <EmberField
+        density={45}
+        className="fixed inset-0 z-0"
+        opacity={0.55}
+      />
 
       <div className="sticky top-4 z-9999 w-full flex justify-center">
         <CardNav
           logoRef={logoRef}
           items={navigation.map((item) => ({
             label: item.name,
-            bgColor: "#1f2937",
-            textColor: "#ffffff",
+            bgColor: "#241108",
+            textColor: "#ffe8c2",
             links: [
               {
                 label: item.name,
@@ -45,42 +50,42 @@ function App() {
               },
             ],
           }))}
-          baseColor="#fff"
-          menuColor="#000"
-          buttonBgColor="#111"
+          baseColor="rgba(11, 6, 4, 0.78)"
+          menuColor="#ffb347"
+          buttonBgColor="#e5382c"
           buttonTextColor="#fff"
           ease="power3.out"
         />
       </div>
 
-      <MainHero
-        title="Transforma tus ideas en"
-        highlightedWord="REALIDAD"
-        buttonText="Agendar cita"
-        buttonLink="#Agendar"
-      />
+      <main className="relative z-10">
+        <MainHero
+          title="Transforma tus ideas en"
+          highlightedWord="REALIDAD"
+          buttonText="Agendar cita"
+          buttonLink="#Agendar"
+        />
 
-      <div id="sobre-nosotros">
-        <AboutUs/>
-      </div>
+        <div id="sobre-nosotros" className="scroll-mt-28">
+          <AboutUs />
+        </div>
 
-      <div id="servicios">
-        <ServiceSection />
-      </div>
+        <div id="servicios" className="scroll-mt-28">
+          <ServiceSection />
+        </div>
 
+        <WhyUsSection />
 
+        <div id="precios">
+          <PricesSection />
+        </div>
 
-      <WhyUsSection />
+        <CalendarSection />
 
-      <div id="precios">
-        <PricesSection />
-      </div>
-
-      <CalendarSection />
-
-      <div id="contacto">
-        <ContactUsSection />
-      </div>
+        <div id="contacto" className="scroll-mt-28">
+          <ContactUsSection />
+        </div>
+      </main>
 
       <Footer />
     </div>

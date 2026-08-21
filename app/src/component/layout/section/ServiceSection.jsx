@@ -1,58 +1,89 @@
-import React from 'react';
-import SpotlightCard from '../cards/SpotlightCard';
-import TrueFocus from '../../effect/TrueFocus';
+import { FiMonitor, FiTrendingUp, FiSmartphone } from "react-icons/fi";
+import SpotlightCard from "../cards/SpotlightCard";
+import TrueFocus from "../../effect/TrueFocus";
+
+const SERVICES = [
+  {
+    icon: <FiMonitor className="h-7 w-7" aria-hidden="true" />,
+    title: "Sitios web y E-Commerce.",
+    subtitle: "Diseño y desarrollo de sitios web.",
+    items: [
+      "Diseño web responsivo.",
+      "Desarrollo de tiendas online.",
+      "Integración de reglas UX/UI.",
+      "Diseño funcional con figma antes del desarrollo del proyecto.",
+    ],
+  },
+  {
+    icon: <FiTrendingUp className="h-7 w-7" aria-hidden="true" />,
+    title: "Herramientas para la gestión de su negocio",
+    subtitle:
+      "Creación de herramientas a medida para control de stock y/o organización.",
+    items: [
+      "Sistemas completos de gestión.",
+      "Automatización y facilitación de procesos.",
+      "Integración de base de datos para el control de stock.",
+    ],
+  },
+  {
+    icon: <FiSmartphone className="h-7 w-7" aria-hidden="true" />,
+    title: "Aplicaciones móviles",
+    subtitle: "Creación o migración de aplicaciones al entorno móvil",
+    items: [
+      "Migración de aplicaciones para lograr un mayor rango de clientela.",
+      "SOLO ANDROID",
+    ],
+  },
+];
 
 export default function ServiceSection() {
-    return (
-        <section className="w-full mt-20 py-11 bg-gray-100 flex flex-col items-center gap-8">
-            <div className="ml-10 w-fit md:self-center text-center">
-                <TrueFocus
-                    sentence="CONCÉNTRATE EN LO IMPORTANTE"
-                    manualMode={false}
-                    blurAmount={5}
-                    borderColor="#ffa31a"
-                    animationDuration={0.5}
-                    pauseBetweenAnimations={1}
-                    textClassName='text-2xl'
-                />
-                <h3 className="mt-10 text-md font-bold">Encomiéndanos tu desarrollo online</h3>
+  return (
+    <section className="relative w-full mt-28 py-16 section-glow">
+      <div className="flex flex-col items-center gap-10 px-4">
+        <div className="w-fit text-center">
+          <TrueFocus
+            sentence="CONCÉNTRATE EN LO IMPORTANTE"
+            manualMode={false}
+            blurAmount={5}
+            borderColor="#ff6b1a"
+            glowColor="rgba(255, 107, 26, 0.6)"
+            animationDuration={0.5}
+            pauseBetweenAnimations={1}
+            textClassName="text-2xl md:text-4xl text-flame-pale"
+          />
+          <h3 className="mt-8 text-lg md:text-xl font-semibold text-ember-muted tracking-wide">
+            Encomiéndanos tu desarrollo online
+          </h3>
+        </div>
 
-            </div>
-            <div className="pl-3 lg:pl-6 pr-6 flex flex-col lg:flex-row justify-center gap-8  color-black">
-                <SpotlightCard className="sm:hover:scale-110 transition-transform bg-[radial-gradient(circle_at_center,_#ffb84d_0%,_#ffa91f_40%,_#c56a00_100%)] " spotlightColor="rgba(255, 255, 255, 0.45)">
-                    <div>
-                        <h3 className="text-lg font-semibold mb-2">Sitios web y E-Commerce.</h3>
-                        <h4 className="text-gray-800">Diseño y desarrollo de sitios web.</h4>
-                        <ul className="list-disc list-inside text-gray-600 mt-2">
-                            <li>Diseño web responsivo.</li>
-                            <li>Desarrollo de tiendas online.</li>
-                            <li>Integración de reglas UX/UI.</li>
-                            <li>Diseño funcional con figma antes del desarrollo del proyecto.</li>
-                        </ul>
-                    </div>
-                </SpotlightCard>
-                <SpotlightCard className="sm:hover:scale-110 transition-transform bg-[#ffa31a] bg-[radial-gradient(circle_at_center,_#ffb84d_0%,_#ffa91f_40%,_#c56a00_100%)]" spotlightColor="rgba(255, 255, 255, 0.69)">
-                    <div>
-                        <h3 className="text-lg font-semibold mb-2">Herramientas para la gestión de su negocio</h3>
-                        <h4 className="text-gray-800">Creación de herramientas a medida para control de stock y/o organización.</h4>
-                        <ul className="list-disc list-inside text-gray-600 mt-2">
-                            <li>Sistemas completos de gestión.</li>
-                            <li>Automatización y facilitación de procesos.</li>
-                            <li>Integración de base de datos para el control de stock.</li>
-                        </ul>
-                    </div>
-                </SpotlightCard>
-                <SpotlightCard className="sm:hover:scale-110 transition-transform bg-[#ffa31a] bg-[radial-gradient(circle_at_center,_#ffb84d_0%,_#ffa91f_40%,_#c56a00_100%)]" spotlightColor="rgba(255, 255, 255, 0.69)">
-                    <div>
-                        <h3 className="text-lg font-semibold mb-2">Aplicaciones móviles</h3>
-                        <h4 className="text-gray-800">Creación o migración de aplicaciones al entorno móvil</h4>
-                        <ul className="list-disc list-inside text-gray-600 mt-2">
-                            <li>Migración de aplicaciones para lograr un mayor rango de clientela.</li>
-                            <li>SOLO ANDROID</li>
-                        </ul>
-                    </div>
-                </SpotlightCard>
-            </div>
-        </section>
-    );
+        <div className="flex flex-col lg:flex-row justify-center gap-7 max-w-6xl w-full">
+          {SERVICES.map((service, i) => (
+            <SpotlightCard
+              key={service.title}
+              className="card-ember rounded-3xl flex-1 group"
+              spotlightColor="rgba(255, 130, 40, 0.22)"
+            >
+              <div style={{ transitionDelay: `${i * 60}ms` }}>
+                <div className="mb-5 inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-gradient-to-br from-flame-red to-flame-orange text-white shadow-[0_0_25px_-5px_rgba(255,107,26,0.7)] transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 animate-flicker">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-flame-pale">
+                  {service.title}
+                </h3>
+                <h4 className="text-sm text-ember-muted">{service.subtitle}</h4>
+                <ul className="mt-4 space-y-2.5 text-sm text-stone-300/85">
+                  {service.items.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="flame-bullet" aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </SpotlightCard>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useMotionValue, useTransform } from "motion/react";
 // replace icons with your own if needed
-import { FiCircle, FiCode, FiFigma, FiLayers, FiLayout } from "react-icons/fi";
+import { FiFigma, FiLayers, FiLayout } from "react-icons/fi";
 import { FaCommentDollar } from "react-icons/fa";
 import { FigmaEx, MoneyRain, ResDessign, Team } from '../../../assets/img'
 
@@ -67,20 +67,20 @@ function CarouselItem({
   return (
     <motion.div
       key={`${item?.id ?? index}-${index}`}
-      className={`relative shrink-0 overflow-hidden bg-[#222] border border-[#222] rounded-xl cursor-grab active:cursor-grabbing ${
+      className={`relative shrink-0 overflow-hidden rounded-2xl cursor-grab active:cursor-grabbing border ${
         round
-          ? "items-center justify-center text-center bg-[#120F17] border-0"
-          : "items-start bg-[#222] border border-[#222] rounded-[12px]"
+          ? "items-center justify-center text-center border-flame-orange/30"
+          : "items-start border-[rgba(255,107,26,0.25)] rounded-2xl shadow-[0_20px_60px_-20px_rgba(229,56,44,0.45)]"
       } overflow-hidden cursor-grab active:cursor-grabbing`}
       style={{
         width: itemWidth,
-        height: round ? itemWidth : "70vh",
+        height: round ? itemWidth : "min(70vh, 560px)",
         rotateY: rotateY,
         ...(round && { borderRadius: "50%" }),
       }}
       transition={transition}
     >
-      <div className="relative w-full h-full">
+      <div className="relative w-full h-full bg-ember-surface">
         {item.image ? (
           <img
             src={item.image}
@@ -89,7 +89,7 @@ function CarouselItem({
             draggable={false}
           />
         ) : (
-          <div className="flex h-full items-center justify-center bg-[#1b1b1b]">
+          <div className="flex h-full items-center justify-center bg-ember-raised">
             {item.icon}
           </div>
         )}
@@ -101,13 +101,13 @@ function CarouselItem({
       bottom-0
       p-8
       bg-gradient-to-t
-      from-black
-      via-black/70
+      from-[#0b0604]
+      via-[#0b0604]/80
       to-transparent
     "
         >
           <motion.h3
-            className="text-2xl font-bold text-white mb-3"
+            className="text-xl md:text-2xl font-bold text-flame-pale mb-3"
             animate={{
               opacity: active ? 1 : 0,
               y: active ? 0 : 20,
@@ -121,7 +121,7 @@ function CarouselItem({
           </motion.h3>
 
           <motion.p
-            className="text-gray-200 leading-7"
+            className="text-stone-300 leading-7"
             animate={{
               opacity: active ? 1 : 0,
               y: active ? 0 : 20,
@@ -334,17 +334,17 @@ export default function Carousel({
           {items.map((_, index) => (
             <motion.div
               key={index}
-              className={`h-4 w-4 rounded-full cursor-pointer transition-colors duration-150 ${
+              className={`h-3.5 w-3.5 rotate-45 cursor-pointer transition-colors duration-200 rounded-[2px] ${
                 activeIndex === index
                   ? round
-                    ? "bg-white"
-                    : "bg-[#333333]"
+                    ? "bg-flame-amber"
+                    : "bg-gradient-to-br from-flame-amber to-flame-red shadow-[0_0_10px_rgba(255,107,26,0.9)]"
                   : round
-                    ? "bg-[#555]"
-                    : "bg-[rgba(51,51,51,0.4)]"
+                    ? "bg-[rgba(255,179,71,0.25)]"
+                    : "bg-[rgba(255,179,71,0.2)]"
               }`}
               animate={{
-                scale: 1.2,
+                scale: activeIndex === index ? 1.35 : 1,
               }}
               transition={{
                 duration: 0.35,
