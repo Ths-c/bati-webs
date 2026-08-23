@@ -39,10 +39,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Email inválido" });
     }
 
-    // En modo testing Resend solo permite enviar al email del dueño de la API key.
-    // Para enviar a ignitex.web@gmail.com hay que verificar un dominio en resend.com/domains
-    // y usar un `from` de ese dominio, o generar una API key con la cuenta ignitex.web@gmail.com.
-    const contactRecipient = process.env.CONTACT_TO_EMAIL || "websbati@gmail.com";
+    // Destinatario configurado para ignitex.web@gmail.com (ver resend.com/domains para dominio verificado)
+    const contactRecipient = process.env.CONTACT_TO_EMAIL || "ignitex.web@gmail.com";
     const data = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: contactRecipient,

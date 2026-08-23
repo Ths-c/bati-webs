@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import SplitText from "../../effect/SplitText";
 
 export default function CalendarSection() {
+  // Cal.com configurado con ignitex.web@gmail.com -> evento ignitex-e5vznt/consulta
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({
