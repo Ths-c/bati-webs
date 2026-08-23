@@ -22,9 +22,12 @@ app.post("/api/contact", async (req, res) => {
       message
     } = req.body;
 
+    // En modo testing Resend solo permite enviar al email del dueño de la API key (websbati@gmail.com).
+    // Verificar dominio en resend.com/domains para usar ignitex.web@gmail.com como destinatario.
+    const contactRecipient = process.env.CONTACT_TO_EMAIL || "websbati@gmail.com";
     const data = await resend.emails.send({
       from: "onboarding@resend.dev",
-      to: "ignitex.web@gmail.com",
+      to: contactRecipient,
       subject: `Nuevo mensaje de ${firstName}`,
       html: `
         <h1>Nuevo contacto</h1>
