@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { FaWhatsapp } from "react-icons/fa";
+import { FiMail } from "react-icons/fi";
+
+export const CONTACT_EMAIL = "ignitex.web@gmail.com";
 
 export default function ContactSimpleForm() {
   const [sending, setSending] = useState(false);
@@ -110,15 +113,25 @@ export default function ContactSimpleForm() {
 
         <p className="text-stone-400 my-10">¿O prefieres contactarnos por WhatsApp?</p>
 
-        <a
-          href="https://wa.me/5492921421616"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 bg-[#25D366] text-white py-3 px-7 rounded-full font-semibold transition-all duration-300 hover:bg-[#128C7E] hover:-translate-y-0.5 shadow-[0_8px_30px_-8px_rgba(37,211,102,0.55)] hover:shadow-[0_14px_40px_-8px_rgba(37,211,102,0.75)]"
-        >
-          <FaWhatsapp className="h-5 w-5" aria-hidden="true" />
-          Enviar mensaje a WhatsApp
-        </a>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <a
+            href="https://wa.me/5492921421616"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-[#25D366] text-white py-3 px-7 rounded-full font-semibold transition-all duration-300 hover:bg-[#128C7E] hover:-translate-y-0.5 shadow-[0_8px_30px_-8px_rgba(37,211,102,0.55)] hover:shadow-[0_14px_40px_-8px_rgba(37,211,102,0.75)]"
+          >
+            <FaWhatsapp className="h-5 w-5" aria-hidden="true" />
+            Enviar mensaje a WhatsApp
+          </a>
+
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="btn-fire inline-flex items-center gap-3 rounded-full px-7 py-3 font-semibold text-white"
+          >
+            <FiMail className="h-5 w-5" aria-hidden="true" />
+            {CONTACT_EMAIL}
+          </a>
+        </div>
       </motion.div>
     </section>
   );

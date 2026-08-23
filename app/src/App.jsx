@@ -8,7 +8,7 @@ import ContactUsSection from "./component/layout/section/ContactUsSection";
 import AboutUs from "./component/layout/section/AboutUs";
 import FlamePreloader from "./component/layout/preloader/FlamePreloader";
 import EmberField from "./component/effect/EmberField";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Footer from "./component/layout/footer/FooterSection";
 
 function App() {
@@ -19,6 +19,11 @@ function App() {
   ];
   const logoRef = useRef(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 10000);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <div className="relative min-h-screen bg-ember-bg text-ember-text">

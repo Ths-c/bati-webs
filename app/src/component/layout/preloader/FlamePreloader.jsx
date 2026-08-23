@@ -33,23 +33,23 @@ export default function FlamePreloader({ logoRef, onFinish }) {
       gsap.set(fuseFillRef.current, { scaleX: 0, transformOrigin: "left center" });
       gsap.set(flashRef.current, { opacity: 0 });
 
-      const tl = gsap.timeline({
-        defaults: { ease: "power2.out" },
-        onComplete: () => onFinish?.(),
-      });
+      // anillos en bucle infinito FUERA de la timeline principal:
+      // si vivieran dentro, bloquearían el playhead y la animación nunca terminaría
+      const ringTweens = [ringARef.current, ringBRef.current]
+        .filter(Boolean)
+        .map((ring, i) =>
+          gsap.fromTo(
+            ring,
+            { scale: 1, opacity: 0.8 },
+            { scale: 1.8, opacity: 0, duration: 1.5, repeat: -1, ease: "none", delay: i * 0.45 }
+          )
+        );
 
-      tl.to(dotRef.current, { scale: 1, opacity: 1, duration: 0.35 })
-        // brasas del logo latiendo en anillos
-        .to(
-          ringARef.current,
-          { scale: 1.7, opacity: 0, duration: 1.5, repeat: -1, ease: "none" },
-          0.15,
-        )
-        .to(
-          ringBRef.current,
-          { scale: 1.7, opacity: 0, duration: 1.5, repeat: -1, ease: "none" },
-          0.55,
-        )
+      const finish = () => onFinish?.();
+
+      const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+
+      tl.to(dotRef.current, { scale: 1, opacity: 1, duration: 0.35 }, 0)
         // la chispa se convierte en llama
         .to(dotRef.current, { scale: 6, opacity: 0, duration: 0.5 }, 0.45)
         .to(flameWrapRef.current, { scale: 1, opacity: 1, duration: 0.55 }, 0.5)
@@ -110,7 +110,6 @@ export default function FlamePreloader({ logoRef, onFinish }) {
           y: dy,
           scale: 0.5,
           duration: 0.8,
-          delay: 0.15,
           ease: "power3.inOut",
         });
       }, 2.6);
@@ -121,7 +120,26 @@ export default function FlamePreloader({ logoRef, onFinish }) {
         2.7,
       )
         .to([fuseFillRef.current, fuseHeadRef.current], { opacity: 0, duration: 0.3 }, 2.7)
-        .to(rootRef.current, { opacity: 0, duration: 0.5, ease: "power1.in" }, 3.15);
+        .to(ringTweens, { timeScale: 3, duration: 0.1 }, 2.7)
+        .to(
+          rootRef.current,
+          {
+            opacity: 0,
+            duration: 0.5,
+            ease: "power1.in",
+            onComplete: () => {
+              ringTweens.forEach((t) => t.kill());
+              finish();
+            },
+          },
+          3.15,
+        );
+
+      // red de seguridad: si algo interrumpe la animación, liberar la pantalla igual
+      gsap.delayedCall(9, () => {
+        ringTweens.forEach((t) => t.kill());
+        finish();
+      });
     }, rootRef);
 
     return () => ctx.revert();

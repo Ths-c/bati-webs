@@ -24,7 +24,7 @@ app.post("/api/contact", async (req, res) => {
 
     const data = await resend.emails.send({
       from: "onboarding@resend.dev",
-      to: "websbati@gmail.com",
+      to: "ignitex.web@gmail.com",
       subject: `Nuevo mensaje de ${firstName}`,
       html: `
         <h1>Nuevo contacto</h1>
