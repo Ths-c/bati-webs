@@ -2,8 +2,11 @@ import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
 import SplitText from "../../effect/SplitText";
 
+const CAL_OWNER_EMAIL = "ignitex.web@gmail.com";
+// Evento Cal.com creado con la cuenta de CAL_OWNER_EMAIL. Si cambias de cuenta, actualiza calLink en Cal.com dashboard -> Event Types -> Copy link
+const CAL_LINK = import.meta.env.VITE_CAL_LINK || "ignitex-e5vznt/consulta";
+
 export default function CalendarSection() {
-  // Cal.com configurado con ignitex.web@gmail.com -> evento ignitex-e5vznt/consulta
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({
@@ -49,7 +52,7 @@ export default function CalendarSection() {
           <div className="w-full h-[75vh] min-h-[520px]">
             <Cal
               namespace="consulta"
-              calLink="ignitex-e5vznt/consulta"
+              calLink={CAL_LINK}
               style={{
                 width: "100%",
                 height: "100%",
