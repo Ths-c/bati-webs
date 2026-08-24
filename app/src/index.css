@@ -200,13 +200,45 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  -webkit-text-fill-color: transparent;
   animation: fireFlow 7s linear infinite;
 }
 
-@supports not (background-clip: text) {
+/* GSAP SplitText mueve el texto a .split-char/.split-word hijos; esos hijos heredan
+   color: transparent pero NO el background, por lo que en móvil el gradiente
+   no se pintaba y el texto quedaba invisible aunque seleccionable. */
+.text-fire .split-char,
+.text-fire .split-word {
+  background: linear-gradient(
+    100deg,
+    #ffe8c2 0%,
+    #ffb347 20%,
+    #ff6b1a 40%,
+    #e5382c 55%,
+    #ff6b1a 70%,
+    #ffb347 85%,
+    #ffe8c2 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: fireFlow 7s linear infinite;
+}
+
+@supports not ((background-clip: text) or (-webkit-background-clip: text)) {
   .text-fire {
     background: none;
     color: #ffb347;
+    -webkit-text-fill-color: #ffb347;
+  }
+  .text-fire .split-char,
+  .text-fire .split-word {
+    background: none;
+    color: #ffb347;
+    -webkit-text-fill-color: #ffb347;
+    animation: none;
   }
 }
 

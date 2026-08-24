@@ -39,19 +39,26 @@ export default function MainHero({ title, highlightedWord, buttonText, buttonLin
             textAlign="center"
             disableScrollTrigger
           />
-          <SplitText
-            text={highlightedWord}
-            tag="span"
-            className="text-fire inline-block align-top drop-shadow-[0_0_35px_rgba(255,107,26,0.45)]"
-            delay={45}
-            duration={1.25}
-            ease="power3.out"
-            splitType="chars"
-            from={{ opacity: 0, y: 60, scale: 0.7 }}
-            to={{ opacity: 1, y: 0, scale: 1 }}
-            textAlign="center"
-            disableScrollTrigger
-          />
+          {/* Wrapper con filter separado del text-fire/background-clip para evitar bug móvil
+              donde filter + background-clip:text en el mismo elemento vuelve el texto invisible */}
+          <span
+            className="inline-block align-top"
+            style={{ filter: "drop-shadow(0 0 35px rgba(255,107,26,0.45))" }}
+          >
+            <SplitText
+              text={highlightedWord}
+              tag="span"
+              className="text-fire inline-block align-top"
+              delay={45}
+              duration={1.25}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 60, scale: 0.7 }}
+              to={{ opacity: 1, y: 0, scale: 1 }}
+              textAlign="center"
+              disableScrollTrigger
+            />
+          </span>
         </h1>
 
         <a
