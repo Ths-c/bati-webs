@@ -203,6 +203,13 @@ body {
   animation: fireFlow 7s linear infinite;
 }
 
+@supports not (background-clip: text) {
+  .text-fire {
+    background: none;
+    color: #ffb347;
+  }
+}
+
 .btn-fire {
   position: relative;
   overflow: hidden;

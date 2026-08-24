@@ -36,9 +36,8 @@ export default function MainHero({ title, highlightedWord, buttonText, buttonLin
             splitType="chars"
             from={{ opacity: 0, y: 60, rotateX: -40 }}
             to={{ opacity: 1, y: 0, rotateX: 0 }}
-            threshold={0.1}
-            rootMargin="-100px"
             textAlign="center"
+            disableScrollTrigger
           />
           <SplitText
             text={highlightedWord}
@@ -50,9 +49,8 @@ export default function MainHero({ title, highlightedWord, buttonText, buttonLin
             splitType="chars"
             from={{ opacity: 0, y: 60, scale: 0.7 }}
             to={{ opacity: 1, y: 0, scale: 1 }}
-            threshold={0.1}
-            rootMargin="-100px"
             textAlign="center"
+            disableScrollTrigger
           />
         </h1>
 

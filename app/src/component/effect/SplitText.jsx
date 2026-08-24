@@ -19,7 +19,8 @@ const SplitText = ({
   rootMargin = '-100px',
   textAlign = 'center',
   tag = 'p',
-  onLetterAnimationComplete
+  onLetterAnimationComplete,
+  disableScrollTrigger = false
 }) => {
   const ref = useRef(null);
   const completedRef = useRef(false);
@@ -108,6 +109,7 @@ const SplitText = ({
             }
           }, 2500);
 
+          const useScroll = !disableScrollTrigger && !inInitialViewport;
           const tween = gsap.fromTo(
             targets,
             { ...from, display: 'inline-block' },
@@ -116,9 +118,8 @@ const SplitText = ({
               duration,
               ease,
               stagger: delay / 1000,
-              scrollTrigger: inInitialViewport
-                ? undefined
-                : {
+              scrollTrigger: useScroll
+                ? {
                     trigger: el,
                     start: () => {
                       const vh = window.innerHeight || 800;
@@ -132,7 +133,8 @@ const SplitText = ({
                     },
                     once: true,
                     invalidateOnRefresh: true
-                  },
+                  }
+                : undefined,
               force3D: true,
               clearProps: 'transform',
               onComplete: () => {
@@ -144,7 +146,7 @@ const SplitText = ({
           );
 
           // Si es hero (ya en viewport) asegurar que ScrollTrigger no lo deje oculto
-          if (inInitialViewport) {
+          if (inInitialViewport || disableScrollTrigger) {
             // Pequeño refresh para que otros triggers recalculen con el nuevo layout
             requestAnimationFrame(() => ScrollTrigger.refresh());
           }
