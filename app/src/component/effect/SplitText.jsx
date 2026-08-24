@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText as GSAPSplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
 
-gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
+gsap.registerPlugin(ScrollTrigger, GSAPSplitText);
 
 const SplitText = ({
   text,
@@ -107,7 +107,8 @@ const SplitText = ({
                       : basePct + adjPct;
                   return `top ${Math.max(0, Math.min(100, pct))}%`;
                 },
-                once: true
+                once: true,
+                invalidateOnRefresh: true
               },
               force3D: true,
               clearProps: 'transform',
@@ -145,10 +146,26 @@ const SplitText = ({
     }
   );
 
+  // En móviles el viewport cambia al ocultar/mostrar la barra de direcciones: refrescar ScrollTrigger
+  useEffect(() => {
+    const onResize = () => ScrollTrigger.refresh();
+    window.addEventListener('resize', onResize);
+    // iOS Safari dispara resize tardío al cargar fuentes
+    const t = setTimeout(() => ScrollTrigger.refresh(), 600);
+    return () => {
+      window.removeEventListener('resize', onResize);
+      clearTimeout(t);
+    };
+  }, [fontsLoaded]);
+
   const renderTag = () => {
     const style = {
       textAlign,
-      wordBreak: 'break-word'
+      wordBreak: 'break-word',
+      overflowWrap: 'anywhere',
+      // Necesario para que rotateX/scale se vean correctos en móviles (iOS necesita perspective)
+      perspective: '800px',
+      transformStyle: 'preserve-3d'
     };
     const classes = `split-parent overflow-hidden whitespace-normal ${className}`;
     const Tag = tag || 'p';
