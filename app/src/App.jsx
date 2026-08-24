@@ -9,7 +9,11 @@ import AboutUs from "./component/layout/section/AboutUs";
 import FlamePreloader from "./component/layout/preloader/FlamePreloader";
 import EmberField from "./component/effect/EmberField";
 import { useState, useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "./component/layout/footer/FooterSection";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const navigation = [
@@ -24,6 +28,15 @@ function App() {
     const t = setTimeout(() => setLoading(false), 10000);
     return () => clearTimeout(t);
   }, []);
+
+  // Cuando el preloader se va, el layout queda detrás de un overlay fijo: refrescar ScrollTrigger
+  // para que los hero SplitText (ya en viewport) disparen. Sin esto en móviles quedan en opacity 0.
+  useEffect(() => {
+    if (!loading) {
+      const id = setTimeout(() => ScrollTrigger.refresh(), 120);
+      return () => clearTimeout(id);
+    }
+  }, [loading]);
 
   return (
     <div className="relative min-h-screen bg-ember-bg text-ember-text">

@@ -50,6 +50,17 @@ const SplitText = ({
       const el = ref.current;
       if (!el || !text || !fontsLoaded || completedRef.current) return;
 
+      // En móviles con preloader, el hero ya está en viewport pero ScrollTrigger
+      // calcula start cuando el overlay fijo aún tapa: queda en opacity 0 para siempre.
+      // Si el elemento ya está visible al montar, animar sin ScrollTrigger.
+      const rect = el.getBoundingClientRect();
+      const inInitialViewport = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) {
+        // Sin animación: mostrar directo
+        return;
+      }
+
       let marginPx = 0;
       const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin ?? '');
       if (marginMatch) {
@@ -87,7 +98,17 @@ const SplitText = ({
 
           if (!targets || targets.length === 0) return null;
 
-          return gsap.fromTo(
+          // Fallback móvil: si ScrollTrigger no dispara en 2.5s, forzar visible
+          const fallback = setTimeout(() => {
+            if (!completedRef.current) {
+              gsap.set(targets, { ...to, display: 'inline-block', clearProps: 'transform' });
+              completedRef.current = true;
+              onCompleteRef.current?.();
+              ScrollTrigger.refresh();
+            }
+          }, 2500);
+
+          const tween = gsap.fromTo(
             targets,
             { ...from, display: 'inline-block' },
             {
@@ -95,29 +116,40 @@ const SplitText = ({
               duration,
               ease,
               stagger: delay / 1000,
-              scrollTrigger: {
-                trigger: el,
-                start: () => {
-                  const vh = window.innerHeight || 800;
-                  // rootMargin negativo = disparar más tarde; positivo = más temprano
-                  const adjPct = (Math.abs(marginPx) / vh) * 100;
-                  const pct =
-                    marginPx < 0
-                      ? basePct - adjPct
-                      : basePct + adjPct;
-                  return `top ${Math.max(0, Math.min(100, pct))}%`;
-                },
-                once: true,
-                invalidateOnRefresh: true
-              },
+              scrollTrigger: inInitialViewport
+                ? undefined
+                : {
+                    trigger: el,
+                    start: () => {
+                      const vh = window.innerHeight || 800;
+                      // rootMargin negativo = disparar más tarde; positivo = más temprano
+                      const adjPct = (Math.abs(marginPx) / vh) * 100;
+                      const pct =
+                        marginPx < 0
+                          ? basePct - adjPct
+                          : basePct + adjPct;
+                      return `top ${Math.max(0, Math.min(100, pct))}%`;
+                    },
+                    once: true,
+                    invalidateOnRefresh: true
+                  },
               force3D: true,
               clearProps: 'transform',
               onComplete: () => {
+                clearTimeout(fallback);
                 completedRef.current = true;
                 onCompleteRef.current?.();
               }
             }
           );
+
+          // Si es hero (ya en viewport) asegurar que ScrollTrigger no lo deje oculto
+          if (inInitialViewport) {
+            // Pequeño refresh para que otros triggers recalculen con el nuevo layout
+            requestAnimationFrame(() => ScrollTrigger.refresh());
+          }
+
+          return tween;
         }
       });
 
