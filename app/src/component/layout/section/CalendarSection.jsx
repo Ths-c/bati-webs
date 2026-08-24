@@ -4,7 +4,7 @@ import SplitText from "../../effect/SplitText";
 
 const CAL_OWNER_EMAIL = "ignitex.web@gmail.com";
 // Evento Cal.com creado con la cuenta de CAL_OWNER_EMAIL. Si cambias de cuenta, actualiza calLink en Cal.com dashboard -> Event Types -> Copy link
-const CAL_LINK = import.meta.env.VITE_CAL_LINK || "https://cal.com/ignitex/consulta";
+const CAL_LINK = import.meta.env.VITE_CAL_LINK || "ignitex/consulta";
 
 export default function CalendarSection() {
   useEffect(() => {
